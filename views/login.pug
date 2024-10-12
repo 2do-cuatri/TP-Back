@@ -1,0 +1,16 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Iniciar sesión 
+    body 
+    h1 Iniciar sesión
+        form(action="/login" method="POST")
+            label(for="email") Email:
+            input(type="email" name="email" required)
+            label(for="pass") Contraseña:
+            input(type="password" name="pass" required)
+             button(type="submit") Iniciar sesión
+    //falta agregar que el botón lleve a la vista products 
+            
