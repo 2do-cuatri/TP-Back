@@ -31,7 +31,7 @@ const postLogin = async (req, res) => {
             res.redirect(`/?userId=${newUser._id}`)
         }
     } catch(err) {
-        res.status(500, err.message)
+        res.status(500).send(err.message)
     }
 };
 

@@ -1,4 +1,4 @@
-const Product = require('../models/product'); 
+const { Product } = require('../models/product'); 
 
 // Listar todos los productos
 const getProducts = async (req, res) => {
@@ -7,7 +7,7 @@ const getProducts = async (req, res) => {
         const products = await Product.find(filters);
         res.status(200).jsonp(products);
     } catch(err) {
-        res.status(500, err.message)
+        res.send(500, err.message)
     }
 };
 
@@ -18,7 +18,7 @@ const getProductById = async (req, res) => {
         const product = await Product.findById(id)
         res.status(200).jsonp(product)
     } catch(err) {
-        res.status(500, err.message)
+        res.status(500).send(err.message)
     }
 };
 
@@ -29,7 +29,7 @@ const postProduct = async (req, res) => {
         await product.save();
         res.status(201).jsonp(product)
     } catch(err) {
-        res.status(500, err.message)
+        res.status(500).send(err.message)
     }
 }
 

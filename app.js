@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const { Product } = require('./models/product')
 
 
 mongoose.connect('mongodb://localhost:27017/').then((mongo) => {
@@ -28,31 +29,29 @@ app.use(checkUser)
 
 const authRoutes = require('./routes/userRoutes');
 const productRoutes = require('./routes/productRoutes');
+const cartRoutes = require('./routes/cartRoutes')
 
 app.use('/productos', productRoutes);
 app.use('/auth', authRoutes);
+app.use('/cart', cartRoutes);
 
+app.use('/static', express.static('public'))
 //Vistas
 app.set('views', './views');
 app.set('view engine','pug');
 
 // Productos de prueba
-app.get('/', function (req, res) {
-  res.render('products', {
-    products: [
-      {
-        category: "prueba",
-        price: 150,
-        name: "Prueba"
-      },
-      {
-        category: "otro",
-        price: 300,
-        name: "Otro"
-      }
-    ],
-    isLoggedIn: !!req.user
-  });
+app.get('/', async function (req, res) {
+    const { userId, ...filters} = req.query;
+    try {
+        const products = await Product.find(filters);
+        res.render('products', {
+          products,
+          isLoggedIn: !!req.user
+        });
+    } catch(err) {
+        res.send(500, err.message)
+    }
 });
 
 
