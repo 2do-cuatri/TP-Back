@@ -13,13 +13,29 @@ app.use('/productos', productRoutes);
 app.use('/auth', authRoutes);
 
 //Vistas
-const pug = require('pug'); //no se si esto va
 app.set('views', './views');
 app.set('view engine','pug');
 
+// Productos de prueba
 app.get('/', function (req, res) {
-  res.render('products');
+  res.render('products', {
+    products: [
+      {
+        category: "prueba",
+        price: 150,
+        name: "Prueba"
+      },
+      {
+        category: "otro",
+        price: 300,
+        name: "Otro"
+      }
+    ],
+    isLoggedIn: false
+  });
 });
+
+
 app.get('/login', function (req, res) {
   res.render('login');
 });

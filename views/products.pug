@@ -16,17 +16,15 @@ html(lang="en")
                   //el botón debería activarse o desactivarse si el cliente está logueado o no
                   
                   //no sé cómo hacer con el botón. Encontré estas opciones pero no sé si alguna sirve
-            //if isLoggedIn
-                        button Comprar
-                    else
-                        button(onclick="window.location.href='/login'") Iniciar sesión para comprar
+                  if isLoggedIn
+                     button Comprar
+                  else
+                     button(onclick="window.location.href='/login'") Iniciar sesión para comprar
 
-
-
-                        button(type="submit", form="addToCartForm") Agregar al carrito
-           // form#addToCartForm(method="post", action="/carrito")
-            script.
-            const isLoggedIn = #{isLoggedIn}; // Variable pasada desde el servidor
-            if (!isLoggedIn) {
-            alert('Debes iniciar sesión para comprar.');
-            }
+                  button(type="submit", form="addToCartForm") Agregar al carrito
+      // form#addToCartForm(method="post", action="/carrito")
+      //- script.
+      //- const isLoggedIn = #{isLoggedIn}; // Variable pasada desde el servidor
+      //- if (!isLoggedIn) {
+      //- alert('Debes iniciar sesión para comprar.');
+      //- }
