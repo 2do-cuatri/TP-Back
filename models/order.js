@@ -2,9 +2,6 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var orderSchema = new Schema({
-  
-  orderId: { type: Number,
-        required: true },
   cartId: { type: Schema.Types.ObjectId,
             ref: 'Cart',
             required: true},

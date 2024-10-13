@@ -6,11 +6,12 @@ html(lang="en")
         title Iniciar sesión 
     body 
     h1 Iniciar sesión
-        form(action="/login" method="POST")
+        if message
+            p #{message}
+        form(action="/auth/login" method="POST")
             label(for="email") Email:
             input(type="email" name="email" required)
             label(for="pass") Contraseña:
             input(type="password" name="pass" required)
             input(type="submit" value="Iniciar sesion")
-    //falta agregar que el botón lleve a la vista products <-- esto lo podemos hacer con un redirect en respuesta al submit
             
