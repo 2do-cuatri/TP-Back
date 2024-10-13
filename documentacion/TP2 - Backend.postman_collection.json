@@ -60,7 +60,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"category\": \"Prueba\",\r\n    \"price\": 150,\r\n    \"name\": \"Prueba 1\",\r\n    \"description\": \"Creando un producto por postman\",\r\n    \"stock\": 100\r\n}",
+							"raw": "{\r\n    \"category\": \"Prueba\",\r\n    \"price\": 1500,\r\n    \"name\": \"Prueba 2\",\r\n    \"description\": \"Creando un producto nuevo por postman\",\r\n    \"stock\": 50\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -110,6 +110,116 @@
 							"path": [
 								"auth",
 								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cart",
+			"item": [
+				{
+					"name": "GET Active Cart",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/cart?userId=670bee029fadde0a5a7afa4a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"cart"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "670bee029fadde0a5a7afa4a"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Cart By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/cart/670c06e1b00f8078ee4c4388?userId=670bee029fadde0a5a7afa4a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"cart",
+								"670c06e1b00f8078ee4c4388"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "670bee029fadde0a5a7afa4a"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Agregar producto",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/cart/670c06e1b00f8078ee4c4388/670c164deca41aa57e29b738?userId=670bee029fadde0a5a7afa4a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"cart",
+								"670c06e1b00f8078ee4c4388",
+								"670c164deca41aa57e29b738"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "670bee029fadde0a5a7afa4a"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Quitar producto",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/cart/670c06e1b00f8078ee4c4388/670be37d91e4a5a860fd8801?userId=670bee029fadde0a5a7afa4a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"cart",
+								"670c06e1b00f8078ee4c4388",
+								"670be37d91e4a5a860fd8801"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "670bee029fadde0a5a7afa4a"
+								}
 							]
 						}
 					},

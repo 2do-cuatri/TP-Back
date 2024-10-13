@@ -4,16 +4,23 @@ let cartId = ''
 
 function updateCart() {
     fetch(`/cart?userId=${userId}`)
-        .then(res => res.json())
+        .then(res => {
+           if (res.ok) {
+                return res.json()
+           } else return null
+        })
         .then(data => {
             if (!data) throw new Error("No data");
             // Actualizar el cart ID si no habia o cambio
             if (data._id && data._id !== cartId) cartId = data._id;
+
             // Limpiar data previa
             document.querySelectorAll("p.item-qty").forEach(p => p.innerHTML = '');
             document.querySelectorAll("button.removeBtn").forEach(b => b.disabled = true);
 
+            // Si por algun motivo la data no viene en la forma que esperamos volver
             if (!data.products || !data.products instanceof Array || data.products.length === 0) return;
+
             // Editar la data de los productos incluidos
             data.products.forEach(item => {
                 if (item.quantity != 0) {
@@ -21,7 +28,10 @@ function updateCart() {
                     document.querySelector(`li[data-id='${item.product._id}'] > button.removeBtn`).disabled = false
                 }
             })
-        }).catch(err => console.error(err))
+        }).catch(err => {
+            console.error("Error al buscar data del carrito")
+            console.error(err)
+        })
 }
 
 updateCart();
