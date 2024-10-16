@@ -35,4 +35,14 @@ const postLogin = async (req, res) => {
     }
 };
 
-module.exports = {getLogin, postLogin};
+// Obtener todos los usuarios
+const getUsers = async (req, res) => {
+    try {
+        const users = await User.find();
+        res.render('admin',{users});
+    } catch (err) {
+        res.status(500).send(err.message);
+    }
+};
+
+module.exports = {getLogin, postLogin, getUsers};

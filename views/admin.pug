@@ -1,0 +1,78 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Menú Administrador
+        
+    body 
+        h1 Menú Administrador 
+        //NO SUPE COMO ELIMINAR PRODUCTOS
+
+        //Sección para agregar productos
+        section#add-product
+            h2 Agregar productos 
+            form(method="post", action="/admin/products")
+                label(for="category") Categoría: 
+                input(type="text" name="category")
+                
+                label(for="name") Nombre: 
+                input(type="text" name="name")
+                
+                label(for="price") Precio: 
+                input(type="number" name="price")
+                
+                label(for="stock") Stock: 
+                input(type="number" name="stock")
+                
+                label(for="description") Descripción: 
+                input(type="text" name="description")
+
+                button(type="submit") Agregar producto
+
+        //Sección para ver y eliminar productos
+        section#delete-product
+            h2 Eliminar productos
+             ul(id="product_list")
+                 each product in products
+                  li(data-id=product._id)
+                    h2= product.name
+                    p Categoría: #{product.category}
+                    p Precio: $#{product.price}
+                    form(method="post", action="/admin/products")
+                      button(type="submit") Eliminar producto
+                    
+        //Sección para ver usuarios
+        section#delete-product
+            h2 Lista de usuarios
+            table 
+                thead 
+                    tr 
+                        th id 
+                        th email 
+                        th rol
+                tbody 
+                    tr 
+                        td = user.id 
+                        td = user.email 
+                        td = user.rol 
+                    
+
+        //Sección para ver órdenes
+        section#orders
+            h2 Lista de Órdenes
+            table
+                thead 
+                    tr
+                        th Orden ID
+                        th Carrito ID
+                        th Fecha
+                        th Monto
+                        th Estado
+            tbody             
+                each order in orders
+                    tr
+                        td= order._id
+                        td= order.date
+                        td= order.payment
+                        td= order.status

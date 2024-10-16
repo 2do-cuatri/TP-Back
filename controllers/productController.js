@@ -33,4 +33,15 @@ const postProduct = async (req, res) => {
     }
 }
 
-module.exports ={getProducts, getProductById, postProduct};
+// Eliminar un producto por ID
+const deleteProduct = async (req, res) => {
+    const id = req.params.id;
+    try {
+        await Product.findByIdAndDelete(id);
+        res.status(200).send("Product deleted successfully");
+    } catch (err) {
+        res.status(500).send(err.message);
+    }
+};
+
+module.exports ={getProducts, getProductById, postProduct, deleteProduct};
