@@ -4,15 +4,14 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         title Menú Administrador
-        
+        script(src="/static/scripts/admin.js", type="text/javascript") 
     body 
         h1 Menú Administrador 
-        //NO SUPE COMO ELIMINAR PRODUCTOS
 
         //Sección para agregar productos
         section#add-product
             h2 Agregar productos 
-            form(method="post", action="/admin/products")
+            form(method="post", action=`/products?userId=${userId}`)
                 label(for="category") Categoría: 
                 input(type="text" name="category")
                 
@@ -35,13 +34,13 @@ html(lang="en")
             h2 Eliminar productos
              ul(id="product_list")
                  each product in products
-                  li(data-id=product._id)
-                    h2= product.name
-                    p Categoría: #{product.category}
-                    p Precio: $#{product.price}
-                    form(method="post", action="/admin/products")
-                      button(type="submit") Eliminar producto
-                    
+                    // funcion js para eliminar productos 
+                    li
+                        h2= product.name
+                        p Categoría: #{product.category}
+                        p Precio: $#{product.price}
+                        button(type="button", onclick=`eliminarProducto('${product._id}')`) Eliminar producto
+                        
         //Sección para ver usuarios
         section#delete-product
             h2 Lista de usuarios
@@ -71,8 +70,9 @@ html(lang="en")
                         th Estado
             tbody             
                 each order in orders
+                    - date = order.date.toLocaleString();
                     tr
                         td= order._id
-                        td= order.date
+                        td= date
                         td= order.payment
                         td= order.status

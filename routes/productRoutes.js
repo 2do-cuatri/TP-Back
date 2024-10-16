@@ -11,4 +11,6 @@ router.post('/', productController.postProduct);
 // Ruta para ver un producto por ID
 router.get('/:id', productController.getProductById);
 
+router.delete('/:id', productController.deleteProduct);
+
 module.exports = router;

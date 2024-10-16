@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { Product } = require('./models/product')
 const Cart = require('./models/cart');
+const User = require('./models/user');
+const Order = require('./models/order');
 
 
 mongoose.connect('mongodb://localhost:27017/').then((mongo) => {
@@ -32,26 +34,25 @@ const authRoutes = require('./routes/userRoutes');
 const productRoutes = require('./routes/productRoutes');
 const cartRoutes = require('./routes/cartRoutes');
 const orderRoutes = require('./routes/orderRoutes');
-const adminRoutes = require('./routes/adminRoutes');
 
-app.use('/productos', productRoutes);
+app.use('/products', productRoutes);
 app.use('/auth', authRoutes);
 app.use('/cart', cartRoutes);
 app.use('/order', orderRoutes);
-app.use('/admin', adminRoutes);
 
 app.use('/static', express.static('public'))
 //Vistas
 app.set('views', './views');
 app.set('view engine','pug');
 
-// Productos de prueba
 app.get('/', async function (req, res) {
     const { userId, ...filters} = req.query;
     try {
         const products = await Product.find(filters);
+        const categories = await Product.find().distinct('category')
         res.render('products', {
           products,
+          categories,
           isLoggedIn: !!req.user
         });
     } catch(err) {
@@ -71,6 +72,22 @@ app.get('/checkout/:cartId', async (req, res) => {
   } catch(err) {
     res.status(500).send(err.message)
   }
+})
+
+app.get('/admin', async (req, res) => {
+    // Chequear que sea admin
+
+    //
+    const products = await Product.find();
+    const users = await User.find();
+    const orders = await Order.find();
+
+    res.render('admin', {
+      products,
+      users,
+      orders,
+      userId: req.user._id
+    })
 })
 
 

@@ -7,6 +7,11 @@ html(lang="en")
       script(src='/static/scripts/products.js', type="text/javascript")
    body 
       h1 Catálogo de productos
+      form(action="/?userId=pirulo")
+         input(name="category", value="prueba")
+         input(type="submit", value="Prueba")
+      each category in categories 
+         p #{category}
       ul(id="product_list")
          each product in products
                li(data-id=product._id)
