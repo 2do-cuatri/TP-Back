@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { Product } = require('./models/product')
+const Cart = require('./models/cart');
 
 
 mongoose.connect('mongodb://localhost:27017/').then((mongo) => {
@@ -29,11 +30,13 @@ app.use(checkUser)
 
 const authRoutes = require('./routes/userRoutes');
 const productRoutes = require('./routes/productRoutes');
-const cartRoutes = require('./routes/cartRoutes')
+const cartRoutes = require('./routes/cartRoutes');
+const orderRoutes = require('./routes/orderRoutes');
 
 app.use('/productos', productRoutes);
 app.use('/auth', authRoutes);
 app.use('/cart', cartRoutes);
+app.use('/order', orderRoutes);
 
 app.use('/static', express.static('public'))
 //Vistas
@@ -53,6 +56,20 @@ app.get('/', async function (req, res) {
         res.send(500, err.message)
     }
 });
+
+app.get('/checkout/:cartId', async (req, res) => {
+  try {
+    const carrito = await Cart.findById(req.params.cartId);
+    if (!carrito) res.status(404).send("Carrito no encontrado!");
+    if (!req.user || !carrito.userId.equals(req.user._id)) res.status(401).send('Parece que este no es tu carrito!');
+    res.render('cart', {
+      carrito,
+      userId: req.user._id
+    })
+  } catch(err) {
+    res.status(500).send(err.message)
+  }
+})
 
 
 app.get('/login', function (req, res) {

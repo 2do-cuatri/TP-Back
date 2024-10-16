@@ -1,0 +1,33 @@
+
+doctype html
+html(lang="en")
+   head
+      meta(charset="UTF-8")
+      meta(name="viewport", content="width=device-width, initial-scale=1.0")
+      title Comercio Mayorista
+   body
+   h1 Carrito
+    if !carrito.active
+        p Este carrito ya expiro!
+    h2 Productos
+    ul(class="product-list")
+        - var total = 0
+        each item in carrito.products
+            - total += item.quantity*item.product.price
+            li(data-id=item.product._id)
+                h2= item.product.name
+                p Categoría: #{item.product.category}
+                p Precio unitario: $#{item.product.price}
+                p Cantidad: #{item.quantity}
+                p Precio final: $#{item.quantity*item.product.price}
+    h2 Checkout
+    p Total: $#{total}
+    form(action=`/order?userId=${userId}`, method="POST")
+        label Modalidad de pago
+        br
+        label(for="pago-transferencia") Transferencia bancaria
+        input(id="pago-transferencia", type="radio", name="tipoPago", value="transferencia", checked)
+        label(for="pago-credito") Tarjeta de Credito
+        input(id="pago-credito", type="radio", name="tipoPago", value="credito")
+        input(hidden, name="cartId", value=carrito._id)
+        input(type="submit", value="Comprar")

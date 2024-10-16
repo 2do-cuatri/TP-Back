@@ -6,7 +6,7 @@ html(lang="en")
       title Comercio Mayorista
       script(src='/static/scripts/products.js', type="text/javascript")
    body 
-     h1 Catálogo de productos
+      h1 Catálogo de productos
       ul(id="product_list")
          each product in products
                li(data-id=product._id)
@@ -20,4 +20,8 @@ html(lang="en")
                      button(type="button", onclick=`removeFromCart('${product._id}')`, class="removeBtn", disabled) Quitar
                   else
                      button(onclick="window.location.href='/login'") Iniciar sesión para comprar
+      if isLoggedIn
+         div(id="cart")
+            div(id="total")
+            button(type="button", id="comprar", disabled, onclick='handleComprar()') Ir al carrito
 
