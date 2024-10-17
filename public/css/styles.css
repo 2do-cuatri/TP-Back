@@ -1,0 +1,66 @@
+body{
+    background-color: rgb(56, 154, 121);
+    margin-left: 2rem;
+    width: 90vw;
+}
+
+h1 {
+    text-align: center;
+    font-size: 3rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+p {
+    font-size: 1.5rem;
+}
+
+input{
+    font-size: 1.2rem;
+    border-radius: 5px;
+    
+}
+
+
+form {
+    display:inline-flex;
+    margin: 0.5rem;
+    font-size: 1.5rem;
+}
+
+
+button, input[type="submit"] {
+    border-radius: 5px;
+    margin-left: 0.5rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: rgb(238, 144, 90);
+}
+
+button:hover {
+    background-color: #647d98;
+}
+
+ul {
+    font-size: 1rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+select {
+    margin-left: 2rem;
+}
+

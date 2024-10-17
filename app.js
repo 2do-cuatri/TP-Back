@@ -81,6 +81,7 @@ app.get('/admin', async (req, res) => {
     const products = await Product.find();
     const users = await User.find();
     const orders = await Order.find();
+    
 
     res.render('admin', {
       products,

@@ -4,7 +4,9 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         title Menú Administrador
+        link(rel="stylesheet", href="/static/css/styles.css")
         script(src="/static/scripts/admin.js", type="text/javascript") 
+        
     body 
         h1 Menú Administrador 
 
@@ -12,20 +14,26 @@ html(lang="en")
         section#add-product
             h2 Agregar productos 
             form(method="post", action=`/products?userId=${userId}`)
-                label(for="category") Categoría: 
-                input(type="text" name="category")
+        
+                div 
+                    label(for="category") Categoría: 
+                    input(type="text" name="category")
                 
-                label(for="name") Nombre: 
-                input(type="text" name="name")
+                div 
+                    label(for="name") Nombre: 
+                    input(type="text" name="name")
                 
-                label(for="price") Precio: 
-                input(type="number" name="price")
+                div 
+                    label(for="price") Precio: 
+                    input(type="number" name="price")
                 
-                label(for="stock") Stock: 
-                input(type="number" name="stock")
+                div 
+                    label(for="stock") Stock: 
+                    input(type="number" name="stock")
                 
-                label(for="description") Descripción: 
-                input(type="text" name="description")
+                div 
+                    label(for="description") Descripción: 
+                    input(type="text" name="description")
 
                 button(type="submit") Agregar producto
 
@@ -42,37 +50,42 @@ html(lang="en")
                         button(type="button", onclick=`eliminarProducto('${product._id}')`) Eliminar producto
                         
         //Sección para ver usuarios
-        section#delete-product
+        section#user-list
             h2 Lista de usuarios
             table 
                 thead 
                     tr 
-                        th id 
-                        th email 
-                        th rol
+                        th ID
+                        th Email 
+                        th Rol
                 tbody 
-                    tr 
-                        td = user.id 
-                        td = user.email 
-                        td = user.rol 
+                    each user in users
+                        tr 
+                            td= user._id 
+                            td= user.email 
+                            td= user.rol 
                     
 
         //Sección para ver órdenes
         section#orders
-            h2 Lista de Órdenes
+            h2 Lista de órdenes
             table
                 thead 
                     tr
                         th Orden ID
-                        th Carrito ID
                         th Fecha
                         th Monto
                         th Estado
-            tbody             
-                each order in orders
-                    - date = order.date.toLocaleString();
-                    tr
-                        td= order._id
-                        td= date
-                        td= order.payment
-                        td= order.status
+                      
+                tbody             
+                    each order in orders
+                        - date = order.date.toLocaleString();
+                        tr
+                            td= order._id
+                            td= date
+                            td= order.payment
+                            td= order.status
+                                select(onchange=`cambiarEstadoOrden('${order._id}', this.value)`)
+                                    option(value="procesando", selected=order.status === 'procesando') Procesando
+                                    option(value="enviado", selected=order.status === 'enviado') Enviado
+                                    option(value="cancelado", selected=order.status === 'cancelado') Cancelado

@@ -4,14 +4,18 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         title Iniciar sesión 
+        link(rel="stylesheet", href="/static/css/styles.css")
     body 
     h1 Iniciar sesión
-        if message
-            p #{message}
-        form(action="/auth/login" method="POST")
-            label(for="email") Email:
-            input(type="email" name="email" required)
-            label(for="pass") Contraseña:
-            input(type="password" name="pass" required)
-            input(type="submit" value="Iniciar sesion")
+        div#login 
+            if message
+                p #{message}
+            form(action="/auth/login" method="POST")
+                div 
+                    label(for="email") Email:
+                    input(type="email" name="email" required)
+                div
+                    label(for="pass") Contraseña:
+                    input(type="password" name="pass" required)
+                input(type="submit" value="Iniciar sesion")
             
