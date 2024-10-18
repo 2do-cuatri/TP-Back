@@ -6,7 +6,13 @@ html(lang="en")
       title Comercio Mayorista
       link(rel="stylesheet", href="/static/css/styles.css")
       script(src='/static/scripts/products.js', type="text/javascript")
-   body 
+   body
+      if (isLoggedIn)
+         h2 Sesión Iniciada
+      else
+         include login
+      
+      
       h1 Catálogo de productos
       form(action="/?userId=pirulo")
          input(name="category", placeholder="Ingrese la categoría")
