@@ -28,7 +28,7 @@ app.use(bodyParser.urlencoded({
 app.use(express.json())
 // Custom
 const { checkUser } = require('./middleware/auth');
-//app.use(checkUser)
+app.use(checkUser)
 
 const authRoutes = require('./routes/userRoutes');
 const productRoutes = require('./routes/productRoutes');
@@ -77,7 +77,7 @@ app.get('/checkout/:cartId', async (req, res) => {
 
 app.get('/admin', async (req, res) => {
     // Chequear que sea admin
-
+    if (!req.user || req.user.rol !== 'administrador') return res.status(403).send('No tienes permisos para acceder a esta sección');
     //
     const { userId, ...filters} = req.query;
     const products = await Product.find(filters);
