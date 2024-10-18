@@ -28,7 +28,7 @@ app.use(bodyParser.urlencoded({
 app.use(express.json())
 // Custom
 const { checkUser } = require('./middleware/auth');
-app.use(checkUser)
+//app.use(checkUser)
 
 const authRoutes = require('./routes/userRoutes');
 const productRoutes = require('./routes/productRoutes');
@@ -55,6 +55,7 @@ app.get('/', async function (req, res) {
           categories,
           isLoggedIn: !!userId
         });
+
     } catch(err) {
         res.send(500, err.message)
     }
