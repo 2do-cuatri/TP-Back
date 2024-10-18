@@ -6,6 +6,7 @@ html(lang="en")
         title Menú Administrador
         link(rel="stylesheet", href="/static/css/styles.css")
         script(src="/static/scripts/admin.js", type="text/javascript") 
+        script(src="/static/scripts/cart.js", type="text/javascript") 
         
     body 
         h1 Menú Administrador 
@@ -85,7 +86,7 @@ html(lang="en")
                             td= date
                             td= order.payment
                             td= order.status
-                                select(onchange=`cambiarEstadoOrden('${order._id}', this.value)`)
+                                select(onchange=`editOrder('${order._id}', this.value)`)
                                     option(value="procesando", selected=order.status === 'procesando') Procesando
                                     option(value="enviado", selected=order.status === 'enviado') Enviado
                                     option(value="cancelado", selected=order.status === 'cancelado') Cancelado
