@@ -23,7 +23,7 @@ const getOrderById = async (req, res) => {
 
         // Si no se encuentra la orden, devolver un error 404
         if (!order) {
-            return res.status(404).send("Orden no encontrada");
+            return res.status(404).send("Orden no encontrada - getOrderById");
         }
 
         // Devolver la orden si se encuentra
@@ -66,10 +66,11 @@ const placeOrder = async (req, res) => {
 }
 
 const editOrder = async (req, res) => {
+    console.log(req.body, req.params, req.query);
     try {
-        const { status } = req.body;
-        const order = await Order.findByIdAndUpdate(req.params.id, { status }, { new: true });
-        if (!order) return res.status(404).send('Orden no encontrada');
+        const status  = req.query.status;
+        const order = await Order.findByIdAndUpdate(req.query.id,{ status: req.query.status}, {new: true});
+        if (!order) return res.status(404).send('Orden no encontrada - editOrder');
         res.status(200).json(order);
     } catch (err) {
         res.status(500).send(err.message);

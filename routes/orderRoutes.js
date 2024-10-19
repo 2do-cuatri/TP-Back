@@ -12,6 +12,6 @@ router.get('/:id', orderController.getOrderById);
 router.post('/', orderController.placeOrder);
 
 //Modificar el estado de una orden
-router.put('/:id', orderController.editOrder);
+router.put('/', orderController.editOrder);
 
 module.exports = router;

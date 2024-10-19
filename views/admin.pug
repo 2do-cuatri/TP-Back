@@ -86,7 +86,9 @@ html(lang="en")
                             td= date
                             td= order.payment
                             td= order.status
-                                select(onchange=`editOrder('${order._id}', this.value)`)
-                                    option(value="procesando", selected=order.status === 'procesando') Procesando
-                                    option(value="enviado", selected=order.status === 'enviado') Enviado
-                                    option(value="cancelado", selected=order.status === 'cancelado') Cancelado
+                                form(method="PUT", action=`/order?id=${order._id}`)
+                                    select(name="status")
+                                        option(value="procesando", selected=order.status === 'procesando') Procesando
+                                        option(value="enviado", selected=order.status === 'enviado') Enviado
+                                        option(value="cancelado", selected=order.status === 'cancelado') Cancelado
+                                    button(type="submit") Cambiar Estado
