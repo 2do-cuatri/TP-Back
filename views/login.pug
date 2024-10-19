@@ -6,16 +6,15 @@ html(lang="en")
         title Iniciar sesión 
         link(rel="stylesheet", href="/static/css/styles.css")
     body 
-    h1 Iniciar sesión
-        div#login 
-            if message
-                p #{message}
-            form(action="/auth/login" method="POST")
-                div 
-                    label(for="email") Email:
-                    input(type="email" name="email" required)
-                div
-                    label(for="pass") Contraseña:
-                    input(type="password" name="pass" required)
-                input(type="submit" value="Iniciar sesion")
-            
+        h1 Iniciar sesión
+            div#login 
+                if message
+                    p #{message}
+                form(action="/auth/login" method="POST")
+                    div 
+                        label(for="email") Email:
+                        input(type="email" name="email" required)
+                    div
+                        label(for="pass") Contraseña:
+                        input(type="password" name="pass" required)
+                    input(type="submit" value="Iniciar sesion")      

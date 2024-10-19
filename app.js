@@ -55,6 +55,7 @@ app.get('/', async function (req, res) {
           categories,
           isLoggedIn: !!userId
         });
+
     } catch(err) {
         res.send(500, err.message)
     }
@@ -76,7 +77,7 @@ app.get('/checkout/:cartId', async (req, res) => {
 
 app.get('/admin', async (req, res) => {
     // Chequear que sea admin
-
+    if (!req.user || req.user.rol !== 'administrador') return res.status(403).send('No tienes permisos para acceder a esta sección');
     //
     const { userId, ...filters} = req.query;
     const products = await Product.find(filters);

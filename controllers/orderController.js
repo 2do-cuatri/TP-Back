@@ -49,7 +49,7 @@ const placeOrder = async (req, res) => {
         const orden = new Order({
             cartId,
             date: new Date().toISOString(),
-            payment: tipoPago === 'transferencia' ? 0 : carrito.products.reduce((acc, curr) => acc+=curr.quantity*curr.product.price, 0),
+            payment: carrito.products.reduce((acc, curr) => acc+=curr.quantity*curr.product.price, 0),
             status: 'procesando'
         })
         await orden.save();
