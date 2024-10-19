@@ -78,15 +78,17 @@ app.get('/admin', async (req, res) => {
     // Chequear que sea admin
 
     //
-    const products = await Product.find();
+    const { userId, ...filters} = req.query;
+    const products = await Product.find(filters);
     const users = await User.find();
     const orders = await Order.find();
-    
+    const categories = await Product.find().distinct('category')
 
     res.render('admin', {
       products,
       users,
       orders,
+      categories,
       userId: req.user._id
     })
 })
