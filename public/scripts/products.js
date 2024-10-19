@@ -30,8 +30,10 @@ function updateCart() {
             data.products.forEach(item => {
                 if (item.quantity != 0) {
                     total += item.product.price*item.quantity
-                    document.querySelector(`li[data-id='${item.product._id}'] > p.item-qty`).innerHTML = item.quantity + " en el carrito."
-                    document.querySelector(`li[data-id='${item.product._id}'] > button.removeBtn`).disabled = false
+                    let itemQty = document.querySelector(`li[data-id='${item.product._id}'] > p.item-qty`)
+                    if (itemQty) itemQty.innerHTML = item.quantity + " en el carrito."
+                    let removeBtn = document.querySelector(`li[data-id='${item.product._id}'] > button.removeBtn`)
+                    if(removeBtn) removeBtn.disabled = false
                 }
             })
 

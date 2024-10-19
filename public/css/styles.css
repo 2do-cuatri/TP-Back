@@ -64,3 +64,43 @@ select {
     margin-left: 2rem;
 }
 
+#categorias {
+    display: flex;
+    list-style: none;
+    gap: 1em;
+}
+#categorias > li > button {
+    background-color: black;
+    color: #ddd;
+}
+#categorias > li > #clean {
+    background-color: gray;
+}
+#categorias > li > button.selected {
+    color: rgb(238, 144, 90)
+}
+
+#cart {
+    position: fixed;
+    top: 3rem;
+    padding: 1rem 3rem;
+    right: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    border-radius: 16px;
+    border: 1px solid black;
+    background-color: lightgray;
+    box-shadow: 0px 0px 1px 3px rgba(0,0,0,0.2);
+}
+#cart > h4 {
+    margin: 0;
+    padding: 0;
+    font-size: larger;
+}
+#total {
+    font-size: x-large;
+    font-weight: bold;
+    color: green;
+}
