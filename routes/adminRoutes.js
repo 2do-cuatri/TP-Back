@@ -16,8 +16,4 @@ router.post('/products', productController.deleteProduct);
 // Ruta para listar todos los usuarios
 router.get('/products', userController.getUsers);
 
-// Ruta para listar todas las órdenes
-router.get('/orders', orderController.getOrders);
-
-
 module.exports = router;

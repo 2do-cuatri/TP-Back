@@ -3,12 +3,35 @@ const Cart = require('../models/cart');
 
 const getOrders = async (req, res) => {
     // Traer todas las orders del user (todas si es admin)
-    throw new Error("No implementado")
+    try {
+        // Trae todas las órdenes sin importar el usuario
+        const orders = await Order.find(); 
+
+        res.render('admin',{orders}); 
+    } catch (err) {
+        res.status(500).send("Error al obtener las órdenes");
+    }
 }
 
 const getOrderById = async (req, res) => {
-    // Traer la orden si esta autorizado a verla
-    throw new Error("No implementado")
+    try {
+        // Obtener el ID de la orden 
+        const orderId = req.params.id;
+
+        // Buscar la orden por su ID en la base de datos
+        const order = await Order.findById(orderId);
+
+        // Si no se encuentra la orden, devolver un error 404
+        if (!order) {
+            return res.status(404).send("Orden no encontrada - getOrderById");
+        }
+
+        // Devolver la orden si se encuentra
+        res.status(200).json(order);
+    } catch (err) {
+        // Si hay un error en el proceso, devolver un error 500
+        res.status(500).send("Error al obtener la orden");
+    }
 }
 
 const placeOrder = async (req, res) => {
@@ -43,14 +66,19 @@ const placeOrder = async (req, res) => {
 }
 
 const editOrder = async (req, res) => {
-    // (Admin) editar el estado de la orden. Algo mas?
-    throw new Error("No implementado")
-}
-
+    try {
+        const status  = req.query.status;
+        const order = await Order.findByIdAndUpdate(req.query.id,{ status: req.query.status}, {new: true});
+        if (!order) return res.status(404).send('Orden no encontrada - editOrder');
+        res.status(200).json(order);
+    } catch (err) {
+        res.status(500).send(err.message);
+    }
+};
 
 module.exports = {
     getOrders,
     getOrderById,
     placeOrder,
     editOrder
-}
+};

@@ -11,4 +11,7 @@ router.get('/:id', orderController.getOrderById);
 // Agregar una orden
 router.post('/', orderController.placeOrder);
 
+//Modificar el estado de una orden
+router.put('/', orderController.editOrder);
+
 module.exports = router;
