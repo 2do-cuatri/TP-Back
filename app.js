@@ -53,7 +53,7 @@ app.get('/', async function (req, res) {
         res.render('products', {
           products,
           categories,
-          isLoggedIn: !!req.user
+          isLoggedIn: !!userId
         });
     } catch(err) {
         res.send(500, err.message)
