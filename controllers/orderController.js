@@ -66,7 +66,6 @@ const placeOrder = async (req, res) => {
 }
 
 const editOrder = async (req, res) => {
-    console.log(req.body, req.params, req.query);
     try {
         const status  = req.query.status;
         const order = await Order.findByIdAndUpdate(req.query.id,{ status: req.query.status}, {new: true});
