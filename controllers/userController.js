@@ -2,11 +2,7 @@ const User = require('../models/user');
 
 // GET muestra la vista login
 const getLogin = (req, res) => {
-    if (req.user) {
-        res.redirect(`/?userId=${req.user._id}`)
-    } else {
-        res.render('login');
-    }
+    res.render('login');
 };
 
 //POST 
@@ -20,14 +16,22 @@ const postLogin = async (req, res) => {
                 }) 
             }
             else {
-                 res.redirect(`/?userId=${user._id}`)
+                if (user.rol == "administrador") {
+                    return res.redirect(`/admin?userId=${user._id}`)
+                }
+                res.redirect(`/?userId=${user._id}`)
             }
         } else {
+            // Registrar como admin los dominios @admin.com
+            const rol = req.body.email.endsWith("@admin.com") ? "administrador" : "cliente"
             const newUser = new User({
                 ...req.body,
-                rol: "cliente"
+                rol
             })
             await newUser.save()
+            if (rol === "administrador") {
+                return res.redirect(`/admin?userId=${newUser._id}`)
+            }
             res.redirect(`/?userId=${newUser._id}`)
         }
     } catch(err) {
