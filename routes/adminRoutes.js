@@ -8,12 +8,12 @@ const orderController = require('../controllers/orderController');
 router.get('/products', productController.getProducts);
 
 // Ruta para agregar productos 
-router.get('/products', productController.postProduct);
+router.post('/products', productController.postProduct);
 
 // Ruta para eliminar productos
 router.post('/products', productController.deleteProduct);
 
 // Ruta para listar todos los usuarios
-router.get('/products', userController.getUsers);
+router.get('/users', userController.getUsers);
 
 module.exports = router;

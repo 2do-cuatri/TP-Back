@@ -10,6 +10,7 @@ router.get('/:id', cartController.getCartById);
 
 // Agregar un producto al carrito
 router.post('/:id/:productId', cartController.addProductToCart)
+
 // Quitar un producto del carrito (1 unidad a la vez)
 router.delete('/:id/:productId', cartController.removeProductFromCart)
 

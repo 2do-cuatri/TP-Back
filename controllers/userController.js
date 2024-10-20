@@ -43,7 +43,7 @@ const postLogin = async (req, res) => {
 const getUsers = async (req, res) => {
     try {
         const users = await User.find();
-        res.render('admin',{users});
+        res.status(200).jsonp(users);
     } catch (err) {
         res.status(500).send(err.message);
     }

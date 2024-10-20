@@ -2,12 +2,12 @@ const Order = require('../models/order');
 const Cart = require('../models/cart');
 
 const getOrders = async (req, res) => {
-    // Traer todas las orders del user (todas si es admin)
+   
     try {
         // Trae todas las órdenes sin importar el usuario
         const orders = await Order.find(); 
 
-        res.render('admin',{orders}); 
+        res.status(200).jsonp(orders); 
     } catch (err) {
         res.status(500).send("Error al obtener las órdenes");
     }
