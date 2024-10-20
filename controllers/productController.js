@@ -25,9 +25,6 @@ const getProductById = async (req, res) => {
 // Agregar un producto
 const postProduct = async (req, res) => {
     try {
-        // Revisar que sea admin
-        //
-        //
         const product = new Product(req.body);
         await product.save();
         res.redirect(`/admin?userId=${req.user._id}`)
