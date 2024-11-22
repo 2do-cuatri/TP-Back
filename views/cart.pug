@@ -7,28 +7,41 @@ html(lang="en")
       title Comercio Mayorista
       link(rel="stylesheet", href="/static/css/styles.css")
    body
-   h1 Carrito
-    if !carrito.active
-        p Este carrito ya expiro!
-    h2 Productos
-    ul(class="product-list")
-        - var total = 0
-        each item in carrito.products
-            - total += item.quantity*item.product.price
-            li(data-id=item.product._id)
-                h2= item.product.name
-                p Categoría: #{item.product.category}
-                p Precio unitario: $#{item.product.price}
-                p Cantidad: #{item.quantity}
-                p Precio final: $#{item.quantity*item.product.price}
-    h2 Checkout
-    p Total: $#{total}
-    form(action=`/order?userId=${userId}`, method="POST")
-        label Modalidad de pago
-        br
-        label(for="pago-transferencia") Transferencia bancaria
-        input(id="pago-transferencia", type="radio", name="tipoPago", value="transferencia", checked)
-        label(for="pago-credito") Tarjeta de Credito
-        input(id="pago-credito", type="radio", name="tipoPago", value="credito")
-        input(hidden, name="cartId", value=carrito._id)
-        input(type="submit", value="Comprar")
+      header
+         h1 Carrito de Compras
+      main
+         if !carrito.active
+            p.alert El carrito ya expiró.
+         else
+            section.products
+               h2 Productos en el carrito
+               ul.product-list
+                  - var total = 0
+                  each item in carrito.products
+                     - total += item.quantity * item.product.price
+                     li.product-item(data-id=item.product._id)
+                        h3= item.product.name
+                        p.categoria Categoría: #{item.product.category}
+                        p.precio-unitario Precio unitario: $#{item.product.price}
+                        p.cantidad Cantidad: #{item.quantity}
+                        p.precio-final Precio final: $#{item.quantity * item.product.price}
+            section.checkout
+               h2 Resumen de Compra
+               p.total Total a pagar: $#{total}
+               form.checkout-form(action=`/order?userId=${userId}`, method="POST")
+                  fieldset
+                     legend Modalidad de pago
+                     label(for="pago-transferencia") 
+                        input#pago-transferencia(type="radio", name="tipoPago", value="transferencia", checked) 
+                        | Transferencia bancaria
+                     br
+                     label(for="pago-credito") 
+                        input#pago-credito(type="radio", name="tipoPago", value="credito") 
+                        | Tarjeta de Crédito
+                  input(type="hidden", name="cartId", value=carrito._id)
+                  button.btn(type="submit") Comprar
+            form.cancel-form(action="/cancel-cart", method="POST")
+                    input(type="hidden", name="cartId", value=carrito._id)
+                    button.cancel-btn(type="submit") Cancelar Compra  
+      footer
+         p © 2024 Comercio Mayorista
