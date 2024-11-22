@@ -10,7 +10,8 @@ const productSchema = new Schema({
            required: true},
   stock: {type: Number,
           required: true},
-  description: {type: String}
+  description: {type: String},
+
 });
 
 module.exports = {

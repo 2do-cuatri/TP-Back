@@ -1,7 +1,7 @@
 const params = new URLSearchParams(window.location.search);
 const userId = params.get('userId');
 let cartId = ''
-
+console.log("hola");
 function updateCart() {
     fetch(`/cart?userId=${userId}`)
         .then(res => {
