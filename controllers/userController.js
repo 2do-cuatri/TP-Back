@@ -49,4 +49,5 @@ const getUsers = async (req, res) => {
     }
 };
 
+
 module.exports = {getLogin, postLogin, getUsers};

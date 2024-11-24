@@ -1,0 +1,47 @@
+doctype html
+html
+  head
+    title Chat en Tiempo Real
+    link(rel="stylesheet", href="/static/css/styles.css")
+    
+  body
+    main
+      h1 Asistente Virtual
+      div.form-container
+        label#roomLabel(for="room") Tipo de Consulta:
+        input#room(type="text" placeholder="Ejemplo: soporte")
+        button#join Unirse
+        textarea#textArea(type="text" autocomplete="off" placeholder="Escribe tu mensaje...")
+        button(type="submit") Enviar
+    script(src="/socket.io/socket.io.js")
+    script.
+      const socket = io();
+
+      const form = document.getElementById('form');
+      const input = document.getElementById('input');
+      const messages = document.getElementById('messages');
+      const joinButton = document.getElementById('join');
+      const roomInput = document.getElementById('room');
+
+      let room = '';
+
+      joinButton.addEventListener('click', () => {
+        room = roomInput.value;
+        socket.emit('join room', room);
+        alert(`Te uniste a la sala: ${room}`);
+      });
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (input.value) {
+          socket.emit('chat message', { room, message: input.value, username: "#{username}" });
+          input.value = '';
+        }
+      });
+
+      socket.on('chat message', ({ username, message }) => {
+        const item = document.createElement('li');
+        item.textContent = `${username}: ${message}`;
+        messages.appendChild(item);
+        messages.scrollTop = messages.scrollHeight;
+      });

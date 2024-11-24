@@ -15,7 +15,7 @@
     --color-categorias-btn: rgb(238, 144, 90);
     --color-form-container-bg: #F7F3E9;
     --color-navbar-bg: #919292;
-    --color-navbar-item-hover: white;
+    --color-navbar-item-hover: rgb(41, 36, 36);
     --color-th-bg: #ccb1b6;
 
   }
@@ -25,6 +25,9 @@ body{
     margin-left: 2rem;
     width: 90vw;
     color: var(--color-text);
+}
+main {
+    margin-top: 5rem;
 }
 section { 
     padding: 3rem;
@@ -98,7 +101,7 @@ input[type="submit"]:hover {
     color: var(--color-btn-hover2);
 }
 
-
+/* Estilos para la navbar*/
 .navbar {
     position: fixed;
     top: 0;
@@ -129,7 +132,7 @@ input[type="submit"]:hover {
     text-decoration: none;
     font-size: 1.7rem;
     padding: 1rem;
-    
+    font-weight: bold;
 }
 
 .nav-item a:hover {
@@ -183,7 +186,7 @@ select {
 
 #cart {
     position: fixed;
-    top: 3rem;
+    top: 5rem;
     padding: 1rem 3rem;
     right: 5%;
     display: flex;
@@ -397,3 +400,60 @@ footer p {
     margin: 0;
     font-size: 1rem;
 }
+
+/* Estilos para el chat */
+
+  #roomLabel {
+    font-size: 1.7rem;
+  }
+  #room {
+    font-size: 1.2rem;
+    padding: 0.5rem;
+    border: 2px solid var(--color-btn-border);
+    border-radius: 10px;
+    width: 90%;
+  }
+  
+  #join {
+    padding: 0.5rem 1rem;
+    font-size: 1.2rem;
+    background-color: var(--color-btn);
+    border: 2px solid var(--color-btn-border);
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  
+  #join:hover {
+    background-color: var(--color-btn-hover);
+  }
+  
+  
+  #textArea {
+    width: 100%; /* Ocupa todo el ancho del contenedor */
+    padding: 1rem; /* Espacio interno */
+    font-size: 1.2rem; /* Tamaño del texto */
+    border: 2px solid var(--color-btn-border); /* Borde similar al resto del formulario */
+    border-radius: 10px; /* Bordes redondeados */
+    height: 9rem; /* Altura inicial */
+    resize: none; /* Evita que el usuario cambie el tamaño del área */
+    box-sizing: border-box; /* Asegura que el padding no aumente el tamaño total */
+    
+  }
+  #room:focus, #textArea:focus {
+    outline: none; /* Elimina el contorno azul predeterminado */
+    border-color: var(--color-btn); /* Cambia el color del borde al enfocar */
+  }
+  
+  button {
+    padding: 0.5rem 1rem;
+    font-size: 1.2rem;
+    background-color: var(--color-btn);
+    border: 2px solid var(--color-btn-border);
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: var(--color-btn-hover);
+  }
+  

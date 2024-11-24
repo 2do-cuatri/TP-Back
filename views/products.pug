@@ -8,42 +8,53 @@ html(lang="en")
       script(src='/static/scripts/products.js', type="text/javascript")
       script(src='/static/scripts/handleCategories.js', type="text/javascript", defer)
    body
-      if (isLoggedIn)
-         h2 Sesión Iniciada
-      else
-         include login
-      
-      h1 Catálogo de Productos
-      h2 Filtros por Categorías
-      ul#categorias
-         each category in categories
-            li
-               button(onclick=`setCategory('${category}')`, data-cat=category) #{category}
-         if categories.length > 0
-            li
-               button#clean(onclick='setCategory()') Limpiar filtros
-      h2 Productos
-      if products.length == 0
-         p(style="color:red;align-text:center;font-size:large;font-weight:bold") Ningun producto coincide con su busqueda
-      
-      div(class="flex-container product-list", id="container")
-         each product in products
-            div(class="product-card")
-               img(class="product-image",src="/static/images/" + product.name + ".jpg", alt=product.name)
-               div(class="product-detail")
-                  h2= product.name
-                  p Decripción: #{product.description}
-                  p Categoría: #{product.category}
-                  p Precio: $#{product.price}
-                  if isLoggedIn
-                     p(class="item-qty")
-                     button(type="button",onclick=`addToCart('${product._id}')`) Agregar al carrito
-                     button(type="button", onclick=`removeFromCart('${product._id}')`, class="removeBtn", disabled) Quitar
-                  else
-                     button(class="btnIS", onclick="window.location.href='/login'") Iniciar sesión para comprar
-      if isLoggedIn
-         div(id="cart")
-            h4 Su Carrito
-            div(id="total")
-            button(type="button", id="comprar", disabled, onclick='handleComprar()') Ir al carrito
+      header
+         nav(class="navbar navbar-expand-lg navbar-light")
+                  div(class="container-fluid")
+                     ul(class="navbar-nav nav-menu")
+                        li(class="nav-item")
+                              a(href="/login") Cambiar de Usuario
+                        li(class="nav-item")
+                              a(href="/chat") ¿Necesitas Ayuda?
+                        
+
+      main   
+         if (isLoggedIn)
+            h2 Sesión Iniciada
+         else
+            include login
+         
+         h1 Catálogo de Productos
+         h2 Filtros por Categorías
+         ul#categorias
+            each category in categories
+               li
+                  button(onclick=`setCategory('${category}')`, data-cat=category) #{category}
+            if categories.length > 0
+               li
+                  button#clean(onclick='setCategory()') Limpiar filtros
+         h2 Productos
+         if products.length == 0
+            p(style="color:red;align-text:center;font-size:large;font-weight:bold") Ningun producto coincide con su busqueda
+         
+         div(class="flex-container product-list", id="container")
+            each product in products
+               div(class="product-card")
+                  img(class="product-image",src="/static/images/" + product.name + ".jpg", alt=product.name)
+                  div(class="product-detail")
+                     h2= product.name
+                     p Decripción: #{product.description}
+                     p Categoría: #{product.category}
+                     p Precio: $#{product.price}
+                     if isLoggedIn
+                        p(class="item-qty")
+                        button(type="button",onclick=`addToCart('${product._id}')`) Agregar al carrito
+                        button(type="button", onclick=`removeFromCart('${product._id}')`, class="removeBtn", disabled) Quitar
+                     else
+                        button(class="btnIS", onclick="window.location.href='/login'") Iniciar sesión para comprar
+         if isLoggedIn
+            div(id="cart")
+               h4 Su Carrito
+               div(id="total")
+               button(type="button", id="comprar", disabled, onclick='handleComprar()') Ir al carrito
 
