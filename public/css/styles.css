@@ -425,6 +425,7 @@ footer p {
     list-style-type: none;
     margin: 1rem;
     padding: 0;
+    width: 90%;
 }  
 .list-group > li {
     padding: 0.5rem;
