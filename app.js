@@ -11,37 +11,16 @@ const http = require('http');
 const { Server } = require('socket.io');
 const server = http.createServer(app); // Servidor HTTP necesario para Socket.IO
 const io = new Server(server); // Instancia de Socket.IO
-// Nueva ruta para el chat
-app.get('/chat', (req, res) => {
-  res.render('chat', {
-    userId: req.user ? req.user._id : null,
-    username: req.user ? req.user.username : 'Invitado',
-  });
-});
 
 // Configuración de Socket.IO
 io.on('connection', (socket) => {
-  console.log(`Usuario conectado: ${socket.id}`);
-
-  // Unirse a una sala específica
-  socket.on('join room', (room) => {
-    socket.join(room);
-    console.log(`Usuario ${socket.id} se unió a la sala ${room}`);
-  });
+  console.log(`Usuario conectado`);
 
   // Manejar mensajes del chat
-  socket.on('chat message', ({ room, message, username }) => {
-    io.to(room).emit('chat message', { username, message });
-    console.log(`Mensaje en la sala ${room}: ${message}`);
-  });
-
-  // Desconexión del cliente
-  socket.on('disconnect', () => {
-    console.log(`Usuario desconectado: ${socket.id}`);
+  socket.on('chat', (message) => {
+    io.emit('chat',message)
   });
 });
-
-
 
 
 mongoose.connect('mongodb://localhost:27017/').then((mongo) => {
@@ -51,7 +30,7 @@ mongoose.connect('mongodb://localhost:27017/').then((mongo) => {
 });
 
 const PORT = 8000;
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
 
@@ -135,3 +114,7 @@ app.get('/login', function (req, res) {
   res.render('login');
 });
 
+// Nueva ruta para el chat
+app.get('/chat', function (req, res) {
+  res.render('chat');
+});

@@ -49,5 +49,9 @@ const getUsers = async (req, res) => {
     }
 };
 
+// GET muestra la vista chat
+const getChat = (req, res) => {
+    res.render('chat');
+};
 
-module.exports = {getLogin, postLogin, getUsers};
+module.exports = {getLogin, postLogin, getUsers, getChat};
