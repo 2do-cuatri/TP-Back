@@ -1,5 +1,5 @@
-# **Carrito de compras mayorista**
-Aplicación de comercio mayorista.
+# **Trabajo Práctico Back End**
+Aplicación de comercio mayorista con Node.js.
 
 ---
 
