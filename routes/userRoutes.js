@@ -7,5 +7,6 @@ router.get('/login', userController.getLogin);
 router.post('/login', userController.postLogin);
 router.post('/logout', userController.postLogout);
 router.get('/user',userController.getUsers);
+router.get('/chat',userController.getChat)
 
 module.exports = router;

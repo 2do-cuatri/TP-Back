@@ -34,8 +34,9 @@ function updateCart() {
                     let removeBtn = document.querySelector(`li[data-id='${item.product._id}'] > button.removeBtn`)
                     if(removeBtn) removeBtn.disabled = false
                 }
+                
             })
-
+            
             // Actualizar el valor del total
             totalElement.innerHTML = "$" + total.toFixed(2);
             if (total > 0) botonComprar.disabled = false;
@@ -67,6 +68,7 @@ function removeFromCart(productId) {
             if (data) updateCart();
         })
         .catch(err => console.error(err))
+        console.log(item.quantity);
 }
 
 function handleComprar() {
