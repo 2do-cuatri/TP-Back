@@ -13,7 +13,9 @@ html(lang="en")
                   div(class="container-fluid")
                      ul(class="navbar-nav nav-menu")
                         li(class="nav-item")
-                              a(href="/login") Cambiar de Usuario
+                           if(isLoggedIn)
+                              form(action="/auth/logout", method="POST") 
+                                 button(type="submit") Salir
                         li(class="nav-item")
                               a(href="/chat") ¿Necesitas Ayuda?
                         
