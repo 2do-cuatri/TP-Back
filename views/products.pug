@@ -36,22 +36,23 @@ html(lang="en")
          h2 Productos
          if products.length == 0
             p(style="color:red;align-text:center;font-size:large;font-weight:bold") Ningun producto coincide con su busqueda
-         
+        
          div(class="flex-container product-list", id="container")
             each product in products
                div(class="product-card")
                   img(class="product-image",src="/static/images/" + product.name + ".jpg", alt=product.name)
                   div(class="product-detail")
-                     h2= product.name
-                     p Decripción: #{product.description}
-                     p Categoría: #{product.category}
-                     p Precio: $#{product.price}
-                     if isLoggedIn
-                        p(class="item-qty")
-                        button(type="button",onclick=`addToCart('${product._id}')`) Agregar al carrito
-                        button(type="button", onclick=`removeFromCart('${product._id}')`, class="removeBtn", disabled) Quitar
-                     else
-                        button(class="btnIS", onclick="window.location.href='/login'") Iniciar sesión para comprar
+                     li(data-id=product._id)
+                        h2= product.name
+                        p Decripción: #{product.description}
+                        p Categoría: #{product.category}
+                        p Precio: $#{product.price}
+                        if isLoggedIn
+                           p(class="item-qty")
+                           button(type="button",onclick=`addToCart('${product._id}')`) Agregar al carrito
+                           button(type="button", onclick=`removeFromCart('${product._id}')`, class="removeBtn", disabled) Quitar
+                        else
+                           button(class="btnIS", onclick="window.location.href='/login'") Iniciar sesión para comprar
          if isLoggedIn
             div(id="cart")
                h4 Su Carrito
