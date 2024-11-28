@@ -23,7 +23,7 @@ io.on('connection', (socket) => {
 });
 
 
-mongoose.connect('mongodb://localhost:27017/').then((mongo) => {
+mongoose.connect('mongodb+srv://admin:F4lBAlnMngDLrDbg@cluster0.o8izs.mongodb.net/').then((mongo) => {
   console.log("Conexion a la base de datos exitosa")
 }).catch(err => {
   console.error("Error al conectar a la base de datos: ", err)
