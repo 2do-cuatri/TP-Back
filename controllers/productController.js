@@ -27,7 +27,7 @@ const postProduct = async (req, res) => {
     try {
         const product = new Product(req.body);
         await product.save();
-        res.redirect(`/admin?userId=${req.user._id}`)
+        res.redirect('/admin')
         // res.status(201).jsonp(product)
     } catch(err) {
         res.status(500).send(err.message)

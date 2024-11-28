@@ -10,6 +10,8 @@ html(lang="en")
    body
       if (isLoggedIn)
          h2 Sesión Iniciada
+         form(action="/auth/logout", method="POST")
+            button(type="submit") Salir
       else
          include login
       
