@@ -59,7 +59,7 @@ const placeOrder = async (req, res) => {
             active: false
         })
 
-        res.redirect('/?userId='+req.user._id);
+        res.redirect('/');
     } catch(err) {
         res.status(500).send(err.message)
     }

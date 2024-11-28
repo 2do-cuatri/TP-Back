@@ -28,7 +28,7 @@ html(lang="en")
             section.checkout
                h2 Resumen de Compra
                p.total Total a pagar: $#{total}
-               form.checkout-form(action=`/order?userId=${userId}`, method="POST")
+               form.checkout-form(action='/order', method="POST")
                   fieldset
                      legend Modalidad de pago
                      label(for="pago-transferencia") 

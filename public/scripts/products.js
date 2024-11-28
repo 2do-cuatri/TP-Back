@@ -1,9 +1,8 @@
 const params = new URLSearchParams(window.location.search);
-const userId = params.get('userId');
 let cartId = ''
 
 function updateCart() {
-    fetch(`/cart?userId=${userId}`)
+    fetch('/cart')
         .then(res => {
            if (res.ok) {
                 return res.json()
@@ -50,7 +49,7 @@ function updateCart() {
 updateCart();
 
 function addToCart(productId) {
-    fetch(`/cart/${cartId}/${productId}?userId=${userId}`, {
+    fetch(`/cart/${cartId}/${productId}`, {
         method: "POST"
     })
         .then(res => res.json())
@@ -61,7 +60,7 @@ function addToCart(productId) {
 }
 
 function removeFromCart(productId) {
-    fetch(`/cart/${cartId}/${productId}?userId=${userId}`, {
+    fetch(`/cart/${cartId}/${productId}`, {
         method: "DELETE"
     })
         .then(res => res.json())
@@ -73,8 +72,7 @@ function removeFromCart(productId) {
 }
 
 function handleComprar() {
-    if (!cartId || !userId) return alert("Hubo un problema con tu carrito!");
+    if (!cartId) return alert("Hubo un problema con tu carrito!");
     const checkoutUrl = new URL('/checkout/'+cartId, window.location.origin);
-    checkoutUrl.searchParams.append('userId', userId)
     window.location.assign(checkoutUrl.href); 
 }

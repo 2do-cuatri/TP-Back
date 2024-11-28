@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const { Product } = require('./models/product')
 const Cart = require('./models/cart');
 const User = require('./models/user');
@@ -40,7 +41,8 @@ app.use(bodyParser.urlencoded({
   type: 'application/x-www-form-urlencoded',
   extended: true
 }));
-app.use(express.json())
+app.use(express.json());
+app.use(cookieParser());
 // Custom
 const { checkUser } = require('./middleware/auth');
 app.use(checkUser)
@@ -61,14 +63,14 @@ app.set('views', './views');
 app.set('view engine','pug');
 
 app.get('/', async function (req, res) {
-    const { userId, ...filters} = req.query;
+    const { ...filters } = req.query;
     try {
         const products = await Product.find(filters);
         const categories = await Product.find().distinct('category')
         res.render('products', {
           products,
           categories,
-          isLoggedIn: !!userId
+          isLoggedIn: !!req.user
         });
 
     } catch(err) {
@@ -83,7 +85,6 @@ app.get('/checkout/:cartId', async (req, res) => {
     if (!req.user || !carrito.userId.equals(req.user._id)) res.status(401).send('Parece que este no es tu carrito!');
     res.render('cart', {
       carrito,
-      userId: req.user._id
     })
   } catch(err) {
     res.status(500).send(err.message)
@@ -94,7 +95,7 @@ app.get('/admin', async (req, res) => {
     // Chequear que sea admin
     if (!req.user || req.user.rol !== 'administrador') return res.status(401).send('No tienes permisos para acceder a esta sección');
     //
-    const { userId, ...filters} = req.query;
+    const { ...filters} = req.query;
     const products = await Product.find(filters);
     const users = await User.find();
     const orders = await Order.find();
@@ -105,7 +106,6 @@ app.get('/admin', async (req, res) => {
       users,
       orders,
       categories,
-      userId: req.user._id
     })
 })
 
