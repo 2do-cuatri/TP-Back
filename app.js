@@ -7,6 +7,7 @@ const { Product } = require('./models/product')
 const Cart = require('./models/cart');
 const User = require('./models/user');
 const Order = require('./models/order');
+require('dotenv').config();
 
 const http = require('http');
 const { Server } = require('socket.io');
@@ -24,7 +25,7 @@ io.on('connection', (socket) => {
 });
 
 
-mongoose.connect('mongodb+srv://admin:F4lBAlnMngDLrDbg@cluster0.o8izs.mongodb.net/').then((mongo) => {
+mongoose.connect(process.env.MONGO_ATLAS_URL).then((mongo) => {
   console.log("Conexion a la base de datos exitosa")
 }).catch(err => {
   console.error("Error al conectar a la base de datos: ", err)
