@@ -7,6 +7,21 @@ const Cart = require('./models/cart');
 const User = require('./models/user');
 const Order = require('./models/order');
 
+const http = require('http');
+const { Server } = require('socket.io');
+const server = http.createServer(app); // Servidor HTTP necesario para Socket.IO
+const io = new Server(server); // Instancia de Socket.IO
+
+// Configuración de Socket.IO
+io.on('connection', (socket) => {
+  console.log(`Usuario conectado`);
+
+  // Manejar mensajes del chat
+  socket.on('chat', (message) => {
+    io.emit('chat',message)
+  });
+});
+
 
 mongoose.connect('mongodb://localhost:27017/').then((mongo) => {
   console.log("Conexion a la base de datos exitosa")
@@ -15,7 +30,7 @@ mongoose.connect('mongodb://localhost:27017/').then((mongo) => {
 });
 
 const PORT = 8000;
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
 
@@ -99,3 +114,7 @@ app.get('/login', function (req, res) {
   res.render('login');
 });
 
+// Nueva ruta para el chat
+app.get('/chat', function (req, res) {
+  res.render('chat');
+});

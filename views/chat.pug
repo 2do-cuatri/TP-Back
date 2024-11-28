@@ -1,0 +1,40 @@
+doctype html
+html
+  head
+    title Asistente Virtual
+    link(rel="stylesheet", href="/static/css/styles.css")
+  
+  body#body-chat
+    main
+      h1 Asistente Virtual
+      div.chat-container
+        ul.list-group
+          li
+        form#chat-form(action="") 
+           input#room(type="text" placeholder="Escribe tu mensaje...")
+           button#send(type="submit") Enviar
+
+        script(src="http://localhost:8000/socket.io/socket.io.js")  
+        script. 
+            let socket = io()  
+            const form = document.querySelector('form')
+            const input = document.querySelector('input')
+            let messages = document.querySelector('ul')
+
+            form.addEventListener('submit', (e)=> {
+              e.preventDefault()
+              if(input.value){
+                socket.emit('chat',input.value)
+                input.value = ''
+              }
+            })
+
+            socket.on('chat',(message)=> {
+              let item = document.createElement('li')
+              item.textContent = message
+              messages.appendChild(item)
+              window.scrollTo(0, document.body.scrollHeight);
+            })
+    
+    
+      
