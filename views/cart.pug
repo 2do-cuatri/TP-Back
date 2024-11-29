@@ -40,8 +40,6 @@ html(lang="en")
                         | Tarjeta de Crédito
                   input(type="hidden", name="cartId", value=carrito._id)
                   button.btn(type="submit") Comprar
-            form.cancel-form(action="/cancel-cart", method="POST")
-                    input(type="hidden", name="cartId", value=carrito._id)
-                    button.cancel-btn(type="submit") Cancelar Compra  
+            
       footer
          p © 2024 Comercio Mayorista
