@@ -7,10 +7,8 @@ Aplicación de comercio mayorista con Node.js.
 1. [Introducción](#introducción)
 2. [Características](#características)
 3. [Tecnologías Usadas](#tecnologías-usadas)
-4. [Base de Datos](#estructura-del-proyecto)
-5. [Autores](#autores)
-6. [Instalación](#instalación)
-
+4. [Autores](#autores)
+5. [Instalación](#instalación)
 
 ---
 
@@ -46,21 +44,6 @@ Para su desarrollo se utilizó:
 - Pug como motor de plantillas para generar dinámicamente las vistas del lado del servidor,
 - Websocket para la creación de un chat que permite a los usuarios comunicarse de manera instantánea en la aplicación.
 
-
----
-
-## **Base de Datos**
-Atlas cluster: admin 2z6cQd9e2y2uGoHe
-
-mongodb+srv://admin:2z6cQd9e2y2uGoHe@cluster0.ftwdy.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
-
-Ejemplo de conexión
-
-const { MongoClient, ServerApiVersion } = require('mongodb'); const uri = "mongodb+srv://admin:2z6cQd9e2y2uGoHe@cluster0.ftwdy.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
-
-// Create a MongoClient with a MongoClientOptions object to set the Stable API version const client = new MongoClient(uri, { serverApi: { version: ServerApiVersion.v1, strict: true, deprecationErrors: true, } });
-
-async function run() { try { // Connect the client to the server (optional starting in v4.7) await client.connect(); // Send a ping to confirm a successful connection await client.db("admin").command({ ping: 1 }); console.log("Pinged your deployment. You successfully connected to MongoDB!"); } finally { // Ensures that the client will close when you finish/error await client.close(); } } run().catch(console.dir);
 
 ---
 
