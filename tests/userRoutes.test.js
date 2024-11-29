@@ -18,12 +18,15 @@ jest.mock('../controllers/userController', () => ({
   getChat: jest.fn((req, res) => {
     return res.status(200).send('Chat Page');
   }),
+  postLogout: jest.fn((req, res) => {
+    return res.status(200).send('Logout Successful');
+  }), 
 }));
 
 
 // Configurar la app de prueba
 const app = express();
-app.use(express.json()); // Para manejar JSON en las solicitudes
+app.use(express.json()); 
 app.use('/', userRoutes);
 
 
@@ -55,6 +58,12 @@ describe('Testing user routes', () => {
     console.log('Response text:', response.text);
     expect(response.status).toBe(200);
     expect(response.text).toBe('Chat Page');
+  });
+
+  test('POST /logout should return Logout Successful', async () => {
+    const response = await request(app).post('/logout');
+    expect(response.status).toBe(200);
+    expect(response.text).toBe('Logout Successful');
   });
 });
 

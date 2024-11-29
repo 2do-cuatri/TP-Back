@@ -140,7 +140,6 @@ input[type="submit"]:hover {
 }
 
 
-
 ul {
     font-size: 1rem;
 }
@@ -186,7 +185,7 @@ select {
 
 #cart {
     position: fixed;
-    top: 5rem;
+    top: 6.5rem;
     padding: 1rem 3rem;
     right: 5%;
     display: flex;
