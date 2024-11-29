@@ -13,6 +13,9 @@ html(lang="en")
             div(class="container-fluid")
                 ul(class="navbar-nav nav-menu")
                     li(class="nav-item")
+                        form(action="/auth/logout", method="POST")
+                            button(type="submit") Salir
+                    li(class="nav-item")
                         a(href="#add-product") Agregar Productos
                     li(class="nav-item")
                         a(href="#categories") Filtros por Categorías
